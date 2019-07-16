@@ -24,11 +24,6 @@ public class CompanyController {
         companys.add(new Company(4,"360",4,employees));
     }
 
-    @GetMapping
-    public List<Company> getAllCompanies(){
-        initCompanys();
-        return companys;
-    }
 
     @GetMapping("/{id}")
     public Company getSpecificCompany(@PathVariable int id){
@@ -42,8 +37,11 @@ public class CompanyController {
         return companys.get(id).getEmployees();
     }
 
-//    @GetMapping
-//    public List<Company>
+    @GetMapping
+    public List<Company> getCompanyByPage(@RequestParam(value = "page",defaultValue = "0") int page,@RequestParam(value = "pageSize",defaultValue = "0") int pageSize){
+        initCompanys();
+        return (page == 0 && pageSize == 0)?companys:companys.subList(page-1,pageSize);
+    }
 
     @PostMapping
     public void addCompany(@RequestBody Company company){
