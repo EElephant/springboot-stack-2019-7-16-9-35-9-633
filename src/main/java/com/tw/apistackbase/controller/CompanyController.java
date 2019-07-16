@@ -59,5 +59,9 @@ public class CompanyController {
         companys.get(company.getId()).setEmployees(company.getEmployees());
     }
 
-    
+    @DeleteMapping("/{id}")
+    public void deleteCompany(@PathVariable int id){
+        initCompanys();
+        companys.remove(id);
+    }
 }
