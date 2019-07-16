@@ -53,5 +53,10 @@ public class EmployeeController {
         employees.get(employee.getId()).setGender(employee.getGender());
         employees.get(employee.getId()).setSalary(employee.getSalary());
     }
-    
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable int id){
+        initEmployees();
+        employees.remove(id);
+    }
 }
