@@ -51,5 +51,13 @@ public class CompanyController {
         companys.add(company);
     }
 
+    @PutMapping("/{id}")
+    public void updateCompany(@RequestBody Company company){
+        initCompanys();
+        companys.get(company.getId()).setCompanyName(company.getCompanyName());
+        companys.get(company.getId()).setEmployeesNumber(company.getEmployeesNumber());
+        companys.get(company.getId()).setEmployees(company.getEmployees());
+    }
 
+    
 }
