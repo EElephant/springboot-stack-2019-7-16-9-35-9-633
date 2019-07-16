@@ -44,5 +44,14 @@ public class EmployeeController {
         initEmployees();
         employees.add(employee);
     }
+
+    @PutMapping("/{id}")
+    public void updateEmployee(@RequestBody Employee employee){
+        initEmployees();
+        employees.get(employee.getId()).setName(employee.getName());
+        employees.get(employee.getId()).setAge(employee.getAge());
+        employees.get(employee.getId()).setGender(employee.getGender());
+        employees.get(employee.getId()).setSalary(employee.getSalary());
+    }
     
 }
