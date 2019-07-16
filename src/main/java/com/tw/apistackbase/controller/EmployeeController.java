@@ -26,8 +26,23 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> getEmployeeByGender(@RequestParam(value = "gender",defaultValue = "all") String gender){
+    public List<Employee> getEmployeeByGender(@RequestParam(value = "gender",defaultValue = "all") String gender,
+                                              @RequestParam(value = "page",defaultValue = "0") int page,
+                                              @RequestParam(value = "pageSize",defaultValue = "0") int pageSize){
         initEmployees();
-        return gender.equals("all")?employees:employees.stream().filter(item -> item.getGender().equals(gender)).collect(Collectors.toList());
+        if(gender.equals("all")&&page==0&&pageSize==0){
+            return employees;
+        }else if(!gender.equals("all")){
+            return employees.stream().filter(item -> item.getGender().equals(gender)).collect(Collectors.toList());
+        }else{
+            return employees.subList(page-1,pageSize);
+        }
     }
+
+    @PostMapping
+    public void addEmployee(@RequestBody Employee employee){
+        initEmployees();
+        employees.add(employee);
+    }
+    
 }
